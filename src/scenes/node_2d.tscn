@@ -1,0 +1,71 @@
+[gd_scene load_steps=8 format=3 uid="uid://bode8on7iogs"]
+
+[ext_resource type="Script" path="res://src/node2D.gd" id="1_61hho"]
+[ext_resource type="PackedScene" uid="uid://ddixo6haibq0y" path="res://src/scenes/icon.tscn" id="2_aydla"]
+[ext_resource type="PackedScene" uid="uid://jliwwwou55nh" path="res://src/scenes/explosion.tscn" id="3_ymbjc"]
+[ext_resource type="AudioStream" uid="uid://p3q4msi1hv1d" path="res://music/House In a Forest Loop.ogg" id="4_hew67"]
+[ext_resource type="AudioStream" uid="uid://d0uas2lgeqvm0" path="res://music/gameover.wav" id="5_xascc"]
+[ext_resource type="AudioStream" uid="uid://g18cbmcqqtj1" path="res://music/error.mp3" id="6_wwfjo"]
+[ext_resource type="AudioStream" uid="uid://b7s5yrl8365xk" path="res://music/coin_collect.mp3" id="7_1w6kr"]
+
+[node name="Main" type="Node2D"]
+script = ExtResource("1_61hho")
+
+[node name="Screen" type="ColorRect" parent="."]
+show_behind_parent = true
+z_as_relative = false
+custom_minimum_size = Vector2(800, 800)
+offset_right = 800.0
+offset_bottom = 800.0
+mouse_filter = 2
+color = Color(0.14902, 0.145098, 0.168627, 1)
+
+[node name="Icon" parent="." instance=ExtResource("2_aydla")]
+position = Vector2(300, 300)
+scale = Vector2(0.8, 0.8)
+
+[node name="Explosion" parent="." instance=ExtResource("3_ymbjc")]
+
+[node name="Sound" type="Node2D" parent="."]
+
+[node name="Music" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("4_hew67")
+
+[node name="MusicGameOver" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("5_xascc")
+
+[node name="Error" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("6_wwfjo")
+volume_db = 20.0
+
+[node name="Point" type="AudioStreamPlayer" parent="Sound"]
+stream = ExtResource("7_1w6kr")
+
+[node name="UI" type="Node2D" parent="."]
+
+[node name="Points" type="Label" parent="UI"]
+offset_left = 280.0
+offset_top = 30.0
+offset_right = 300.0
+offset_bottom = 53.0
+scale = Vector2(2, 2)
+mouse_filter = 0
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="GameOver" type="Label" parent="UI"]
+visible = false
+offset_left = 100.0
+offset_top = 300.0
+offset_right = 300.0
+offset_bottom = 350.0
+scale = Vector2(3, 3)
+theme_override_font_sizes/font_size = 28
+text = "Game Over!"
+horizontal_alignment = 1
+vertical_alignment = 1
+
+[node name="Timer" type="Timer" parent="UI"]
+autostart = true
+
+[connection signal="timeout" from="UI/Timer" to="." method="_on_timer_timeout"]
