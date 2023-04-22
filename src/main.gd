@@ -12,7 +12,10 @@ extends Node2D
 
 const LIMIT_WINDOW: int = 100
 const COLOURS = [Color.AQUAMARINE, Color.DARK_ORANGE, Color.CRIMSON]
-const MULT_ROTATION : int = 1000
+const MULT_ROTATION: int = 1000
+const MAX_FAILS: int = 3
+const WAIT_TIME: float = 0.995
+const PITCH_SCALE: float = 1.005
 
 var rng: RandomNumberGenerator = RandomNumberGenerator.new()
 var viewport_size: Vector2
@@ -44,7 +47,7 @@ func _on_timer_timeout() -> void:
 	is_clicked = false
 	
 	move_icon_random_position()
-	Music.pitch_scale *= 1.005
+	Music.pitch_scale *= PITCH_SCALE
 
 
 @warning_ignore('narrowing_conversion')
@@ -63,7 +66,7 @@ func move_icon_random_position() -> void:
 func fail_count_update() -> void:
 	if not is_clicked:
 		fail_count += 1
-		if fail_count < 3:
+		if fail_count < MAX_FAILS:
 			ErrorAudio.play()
 
 
@@ -78,7 +81,7 @@ func game_over() -> void:
 
 
 func check_fail_count() -> void:
-	if fail_count < 3:
+	if fail_count < MAX_FAILS:
 		Points.set_modulate(COLOURS[fail_count])
 	else:
 		game_over()
@@ -88,9 +91,9 @@ func _on_click() -> void:
 	if not is_clicked:
 		points += 1
 		Points.text = '%s' % points
-		GameTimer.wait_time *= 0.995
+		GameTimer.wait_time *= WAIT_TIME
 		is_clicked = true
 		PointAudio.play()
-		Icon.modulate = Color.DIM_GRAY #Color(0.745098, 0.745098, 0.745098, 1)
+		Icon.modulate = Color.DIM_GRAY
 		Explosion.position = Icon.position
 		Explosion.emitting = true
