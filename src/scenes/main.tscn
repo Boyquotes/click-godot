@@ -1,15 +1,15 @@
 [gd_scene load_steps=8 format=3 uid="uid://bode8on7iogs"]
 
-[ext_resource type="Script" path="res://src/node2D.gd" id="1_61hho"]
-[ext_resource type="PackedScene" uid="uid://ddixo6haibq0y" path="res://src/scenes/icon.tscn" id="2_aydla"]
-[ext_resource type="PackedScene" uid="uid://jliwwwou55nh" path="res://src/scenes/explosion.tscn" id="3_ymbjc"]
-[ext_resource type="AudioStream" uid="uid://p3q4msi1hv1d" path="res://music/House In a Forest Loop.ogg" id="4_hew67"]
-[ext_resource type="AudioStream" uid="uid://d0uas2lgeqvm0" path="res://music/gameover.wav" id="5_xascc"]
-[ext_resource type="AudioStream" uid="uid://g18cbmcqqtj1" path="res://music/error.mp3" id="6_wwfjo"]
-[ext_resource type="AudioStream" uid="uid://b7s5yrl8365xk" path="res://music/coin_collect.mp3" id="7_1w6kr"]
+[ext_resource type="Script" path="res://src/main.gd" id="1_8ubyj"]
+[ext_resource type="PackedScene" uid="uid://ddixo6haibq0y" path="res://src/scenes/icon.tscn" id="2_4025t"]
+[ext_resource type="PackedScene" uid="uid://jliwwwou55nh" path="res://src/scenes/explosion.tscn" id="3_5kmy5"]
+[ext_resource type="AudioStream" uid="uid://p3q4msi1hv1d" path="res://music/House In a Forest Loop.ogg" id="4_tjkeh"]
+[ext_resource type="AudioStream" uid="uid://d0uas2lgeqvm0" path="res://music/gameover.wav" id="5_m1ujw"]
+[ext_resource type="AudioStream" uid="uid://g18cbmcqqtj1" path="res://music/error.mp3" id="6_kprxu"]
+[ext_resource type="AudioStream" uid="uid://b7s5yrl8365xk" path="res://music/coin_collect.mp3" id="7_ot657"]
 
 [node name="Main" type="Node2D"]
-script = ExtResource("1_61hho")
+script = ExtResource("1_8ubyj")
 
 [node name="Screen" type="ColorRect" parent="."]
 show_behind_parent = true
@@ -20,26 +20,26 @@ offset_bottom = 800.0
 mouse_filter = 2
 color = Color(0.14902, 0.145098, 0.168627, 1)
 
-[node name="Icon" parent="." instance=ExtResource("2_aydla")]
+[node name="Icon" parent="." instance=ExtResource("2_4025t")]
 position = Vector2(300, 300)
 scale = Vector2(0.8, 0.8)
 
-[node name="Explosion" parent="." instance=ExtResource("3_ymbjc")]
+[node name="Explosion" parent="." instance=ExtResource("3_5kmy5")]
 
 [node name="Sound" type="Node2D" parent="."]
 
 [node name="Music" type="AudioStreamPlayer" parent="Sound"]
-stream = ExtResource("4_hew67")
+stream = ExtResource("4_tjkeh")
 
 [node name="MusicGameOver" type="AudioStreamPlayer" parent="Sound"]
-stream = ExtResource("5_xascc")
+stream = ExtResource("5_m1ujw")
 
 [node name="Error" type="AudioStreamPlayer" parent="Sound"]
-stream = ExtResource("6_wwfjo")
+stream = ExtResource("6_kprxu")
 volume_db = 20.0
 
 [node name="Point" type="AudioStreamPlayer" parent="Sound"]
-stream = ExtResource("7_1w6kr")
+stream = ExtResource("7_ot657")
 
 [node name="UI" type="Node2D" parent="."]
 
